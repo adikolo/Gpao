@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Fri Dec 16 13:59:58 CET 2016:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872) : instance a816c00e-0159-07b7-b739-0000033208f0 
+dans le répertoire de base de données C:\Users\Assane Adirou\Documents\NetBeansProjects\Gpao_V1_0\Gpao_v_1  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@33909752
+Chargé de file:/C:/Users/Assane%20Adirou/Documents/NetBeansProjects/Gpao_V1_0/dist/run1144793050/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_65-b17
+user.dir=C:\Users\Assane Adirou\Documents\NetBeansProjects\Gpao_V1_0
+derby.system.home=null
+Chargeur de classe de la base de données démarré - derby.database.classpath = ''

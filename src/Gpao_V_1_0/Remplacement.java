@@ -1,0 +1,643 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Gpao_V_1_0;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import net.proteanit.sql.DbUtils;
+
+/**
+ *
+ * @author Assane Adirou
+ */
+public class Remplacement extends javax.swing.JFrame {
+// declaration de variable
+    PreparedStatement prst;
+    ResultSet rst;
+    Connection conn;
+
+    /**
+     * Creates new form Remplacement
+     */
+    public Remplacement() throws SQLException {
+        initComponents();
+        // initialisation du constructeur avec ces differentes methodes
+        rempli_cbx_design_remplace();
+        rempli_cbx_design_remplaçant();
+        rempli_combo_compose_remplace();
+        rempli_combo_composant_remplace();
+        rempli_combo_composant_remplaçant();
+        rempli_combo_compose_remplaçant();
+        affichage();
+    }
+
+    // affichage 
+    public void affichage() {
+        try {
+            conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+            String req = "select *from Remplacement";
+            prst = conn.prepareStatement(req);
+            rst = prst.executeQuery();
+            Table1.setModel(DbUtils.resultSetToTableModel(rst));
+        } catch (SQLException ex) {
+            Logger.getLogger(Remplacement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+// vider less champs necessaire
+    public void vider() {
+        txt_date.setCalendar(null);
+
+    }
+// remplissage du combo fesant reference a la designation articles
+    public void rempli_cbx_design_remplace() throws SQLException {
+
+      conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+        String req = "select designation from article";
+
+        prst = conn.prepareStatement(req);
+
+        rst = prst.executeQuery();
+
+        while (rst.next()) {
+            String des = rst.getString("designation");
+            cbx_arti_remplace.addItem(des);
+
+        }
+    }
+// remplissage du combo fesant reference a la designation articles
+
+    public void rempli_cbx_design_remplaçant() throws SQLException {
+
+        conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+        String req = "select designation from article";
+
+        prst = conn.prepareStatement(req);
+
+        rst = prst.executeQuery();
+
+        while (rst.next()) {
+            String des = rst.getString("designation");
+            cbx_art_rempcant.addItem(des);
+
+        }
+    }
+// remplissage du combo fesant reference au lien nomenclature
+
+    public void rempli_combo_compose_remplace() throws SQLException {
+
+       conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+        String req2 = "select compose from Lien_de_nomenclature";
+
+        prst = conn.prepareStatement(req2);
+
+        rst = prst.executeQuery();
+
+        while (rst.next()) {
+            String des = rst.getString("compose");
+            cbx_remp_compose.addItem(des);
+
+        }
+    }
+// remplissage du combo fesant reference au lien nomenclature
+
+    public void rempli_combo_composant_remplace() throws SQLException {
+
+       conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+        String req = "select composant from Lien_de_nomenclature";
+
+        prst = conn.prepareStatement(req);
+
+        rst = prst.executeQuery();
+
+        while (rst.next()) {
+            String des = rst.getString("composant");
+            cbx_rem_compsant.addItem(des);
+
+        }
+    }
+// remplissage du combo fesant reference a l element compose de la table lien nomenclature
+
+    public void rempli_combo_compose_remplaçant() throws SQLException {
+
+        conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+        String req2 = "select compose from Lien_de_nomenclature";
+
+        prst = conn.prepareStatement(req2);
+
+        rst = prst.executeQuery();
+
+        while (rst.next()) {
+            String des = rst.getString("compose");
+            cbx_remplaçant_compose.addItem(des);
+
+        }
+    }
+// remplissage du combo fesant reference a l element composant de la table lien nomenclature
+
+    public void rempli_combo_composant_remplaçant() throws SQLException {
+
+        Connection conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+        String req = "select composant from Lien_de_nomenclature";
+
+        prst = conn.prepareStatement(req);
+
+        rst = prst.executeQuery();
+
+        while (rst.next()) {
+            String des = rst.getString("composant");
+            cbx_remplacant_composant.addItem(des);
+
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        btn_enr = new javax.swing.JButton();
+        btn_modif = new javax.swing.JButton();
+        btn_supp = new javax.swing.JButton();
+        btn_affich = new javax.swing.JButton();
+        btn_rese = new javax.swing.JButton();
+        btn_prec = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cbx_arti_remplace = new javax.swing.JComboBox<>();
+        cbx_rem_compsant = new javax.swing.JComboBox<>();
+        cbx_remplaçant_compose = new javax.swing.JComboBox<>();
+        cbx_remplacant_composant = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Table1 = new javax.swing.JTable();
+        btn_quitter = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cbx_remp_compose = new javax.swing.JComboBox<>();
+        cbx_art_rempcant = new javax.swing.JComboBox<>();
+        txt_date = new com.toedter.calendar.JDateChooser();
+        jLabel21 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Remplacement", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 4, new java.awt.Color(255, 255, 255)));
+
+        btn_enr.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_enr.setText("Enregistrer");
+        btn_enr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_enrActionPerformed(evt);
+            }
+        });
+
+        btn_modif.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_modif.setText("Modifier");
+        btn_modif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modifActionPerformed(evt);
+            }
+        });
+
+        btn_supp.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_supp.setText("Supprimer");
+        btn_supp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suppActionPerformed(evt);
+            }
+        });
+
+        btn_affich.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_affich.setText("Affichage");
+        btn_affich.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_affichActionPerformed(evt);
+            }
+        });
+
+        btn_rese.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_rese.setText("Reset");
+        btn_rese.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_reseActionPerformed(evt);
+            }
+        });
+
+        btn_prec.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_prec.setText("Precedent");
+        btn_prec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_precActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_enr)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_modif))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_affich, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_rese, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_supp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_prec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_enr)
+                    .addComponent(btn_modif)
+                    .addComponent(btn_supp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_prec)
+                    .addComponent(btn_rese)
+                    .addComponent(btn_affich))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Remplace Composant");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Remplace Compose");
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Remplaçant composant");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Remplaçant Compose");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Date De Remplaçement ");
+
+        Table1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        Table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Table1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Table1);
+
+        btn_quitter.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_quitter.setText("Quitter");
+        btn_quitter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_quitterActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Designation Article remplace");
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Designation Article remplaçant");
+
+        txt_date.setDateFormatString("yyyy-MM-dd");
+
+        jLabel21.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Gpao Version 1.0");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cbx_remplaçant_compose, 0, 237, Short.MAX_VALUE)
+                            .addComponent(cbx_remplacant_composant, 0, 237, Short.MAX_VALUE)
+                            .addComponent(cbx_art_rempcant, 0, 237, Short.MAX_VALUE)
+                            .addComponent(txt_date, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_quitter)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbx_rem_compsant, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(28, 28, 28)
+                            .addComponent(cbx_arti_remplace, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(33, 33, 33)
+                            .addComponent(cbx_remp_compose, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel21))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(cbx_arti_remplace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbx_remp_compose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbx_rem_compsant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(cbx_art_rempcant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_remplacant_composant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbx_remplaçant_compose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_quitter)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quitterActionPerformed
+        // Pour quitter et fermer l'application directement 
+        this.dispose();
+    }//GEN-LAST:event_btn_quitterActionPerformed
+
+    private void btn_enrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enrActionPerformed
+        try {
+            // Pour faire un enregistrement dans la base de donnée
+            
+            
+                 conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+            String sql = "insert into  Remplacement(arti_remplace,remplace_compose,remplace_composant,art_rempcant,remplacant_compose,remplacant_composant,date_de_remplacement ) values(?,?,?,?,?,?,?)";
+            prst = conn.prepareStatement(sql);
+            prst.setString(1, (String) cbx_arti_remplace.getSelectedItem());
+            prst.setString(2, (String) cbx_remp_compose.getSelectedItem());
+            prst.setString(3, (String) cbx_rem_compsant.getSelectedItem());
+            prst.setString(4, (String) cbx_art_rempcant.getSelectedItem());
+            prst.setString(5, (String) cbx_remplaçant_compose.getSelectedItem());
+            prst.setString(6, (String) cbx_remplacant_composant.getSelectedItem());
+            prst.setString(7, ((JTextField) txt_date.getDateEditor().getUiComponent()).getText() );
+            prst.execute();
+            affichage();
+            JOptionPane.showMessageDialog(null, "insertion Reussi !!! Merci");
+            vider();
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "veuillez remplir tout les champs");
+        }
+          
+
+    }//GEN-LAST:event_btn_enrActionPerformed
+
+    private void btn_modifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modifActionPerformed
+        try {
+            // modification de la table remplacement
+
+            conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+            String req = "update Remplacement set arti_remplace=?,remplace_compose=?,remplace_composant=?,art_rempcant=?,remplacant_compose=?,remplacant_composant=?,date_de_remplacement=?  ";
+
+            prst = conn.prepareStatement(req);
+            prst.setString(1, (String) cbx_arti_remplace.getSelectedItem());
+            prst.setString(2, (String) cbx_remp_compose.getSelectedItem());
+            prst.setString(3, (String) cbx_rem_compsant.getSelectedItem());
+            prst.setString(4, (String) cbx_art_rempcant.getSelectedItem());
+            prst.setString(5, (String) cbx_remplaçant_compose.getSelectedItem());
+            prst.setString(6, (String) cbx_remplacant_composant.getSelectedItem());
+            prst.setString(7, ((JTextField) txt_date.getDateEditor().getUiComponent()).getText());
+
+            prst.execute();
+            affichage();
+            JOptionPane.showMessageDialog(null, "Modification Reussi !!! Merci");
+            vider();
+        } catch (SQLException ex) {
+            Logger.getLogger(Remplacement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        
+                                           
+    }//GEN-LAST:event_btn_modifActionPerformed
+
+    private void btn_suppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suppActionPerformed
+        // Pour supprimer dans la base de donnée
+        
+            try {
+          conn = DriverManager.getConnection("jdbc:derby:Gpao_v_1");
+      } catch (SQLException ex) {
+          Logger.getLogger(Suppression_Article.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        
+        if (JOptionPane.showConfirmDialog(null, "attention vous voulez Supprimer une action de remplaçement, vous etes sur?",
+                    "Supprimer action de remplacement", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
+
+             try {
+                 String requete = "delete from Remplacement where arti_remplace = '" + cbx_arti_remplace.getSelectedItem()+ "' ";
+                 prst = conn.prepareStatement(requete);
+                 prst.execute();
+                  Table1.setModel(DbUtils.resultSetToTableModel(rst));
+                  affichage();
+                  vider();
+                 JOptionPane.showMessageDialog(null,"Action de Replacement supprimé avec succès !!!");
+             } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null,"impossible de supprimé l'Action de Replacement !!!" + ex.getMessage());
+             }
+        
+        
+    }                        
+    }//GEN-LAST:event_btn_suppActionPerformed
+
+    private void btn_affichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_affichActionPerformed
+        // appel de la methode affaichage
+        affichage();
+    }//GEN-LAST:event_btn_affichActionPerformed
+
+    private void btn_reseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reseActionPerformed
+        // vider les champ
+        txt_date.setDate(null);
+        
+    }//GEN-LAST:event_btn_reseActionPerformed
+
+    private void btn_precActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_precActionPerformed
+
+        // Retour en arrière
+        Menu_Gpao mpr = new Menu_Gpao();
+        mpr.setVisible(rootPaneCheckingEnabled);
+        this.dispose();
+    }//GEN-LAST:event_btn_precActionPerformed
+
+    private void Table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table1MouseClicked
+            // Affichage des éléments du tableaux dans les champs de saisir
+
+        
+        cbx_arti_remplace.setSelectedItem(Table1.getValueAt(Table1.getSelectedRow(), 0));
+        cbx_remp_compose.setSelectedItem(Table1.getValueAt(Table1.getSelectedRow(), 1));
+        cbx_rem_compsant.setSelectedItem(Table1.getValueAt(Table1.getSelectedRow(), 2));
+        cbx_art_rempcant.setSelectedItem(Table1.getValueAt(Table1.getSelectedRow(), 3));
+        cbx_remplaçant_compose.setSelectedItem(Table1.getValueAt(Table1.getSelectedRow(), 4));
+        cbx_remplacant_composant.setSelectedItem(Table1.getValueAt(Table1.getSelectedRow(), 5));
+        txt_date.setDate((Date) Table1.getValueAt(Table1.getSelectedRow(), 6));
+       
+               
+    }//GEN-LAST:event_Table1MouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Remplacement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Remplacement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Remplacement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Remplacement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new Remplacement().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Remplacement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table1;
+    private javax.swing.JButton btn_affich;
+    private javax.swing.JButton btn_enr;
+    private javax.swing.JButton btn_modif;
+    private javax.swing.JButton btn_prec;
+    private javax.swing.JButton btn_quitter;
+    private javax.swing.JButton btn_rese;
+    private javax.swing.JButton btn_supp;
+    private javax.swing.JComboBox<String> cbx_art_rempcant;
+    private javax.swing.JComboBox<String> cbx_arti_remplace;
+    private javax.swing.JComboBox<String> cbx_rem_compsant;
+    private javax.swing.JComboBox<String> cbx_remp_compose;
+    private javax.swing.JComboBox<String> cbx_remplacant_composant;
+    private javax.swing.JComboBox<String> cbx_remplaçant_compose;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser txt_date;
+    // End of variables declaration//GEN-END:variables
+}
